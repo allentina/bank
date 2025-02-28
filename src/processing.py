@@ -1,4 +1,4 @@
-from datetime import datetime
+#from datetime import datetime
 from typing import List, Dict
 
 def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
@@ -20,3 +20,21 @@ def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
     :rtype: List[Dict]
     """
     return [item for item in data if item.get('state') == state]
+
+def sort_by_date(data: List[Dict], reverse: bool = True) -> List[Dict]:
+    """
+    Возвращает новый список словарей из 'data', отсортированных по ключу 'date'.
+
+    :param data: Исходный список словарей.
+    :type data: List[Dict]
+    :param reverse: Порядок сортировки. True = по убыванию (самые свежие даты в начале).
+                    False = по возрастанию (самые старые даты в начале).
+                    По умолчанию True.
+    :type reverse: bool
+    :return: Отсортированный по дате список словарей.
+    :rtype: List[Dict]
+    """
+    # Преобразуем строку даты в datetime-объект для корректной сортировки
+    # date в формате "YYYY-MM-DDTHH:MM:SS.ssssss"
+    # Например: "2019-07-03T18:35:29.512364"
+    return sorted(data, key=lambda x: x['date'], reverse=reverse)
