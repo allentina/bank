@@ -28,3 +28,20 @@
    usd_transactions = filter_by_currency(transactions, "USD")
    for t in usd_transactions:
        print(t)  # выведутся только USD-транзакции
+
+## Модуль decorators
+
+Реализован декоратор `log`, который автоматически логирует результат вызова функции (успешно / с ошибкой).
+
+### Использование
+
+```python
+from src.decorators import log
+
+@log()  # вывод логов в консоль
+def add(a, b):
+    return a + b
+
+@log(filename="mylog.txt")  # вывод логов в файл
+def sub(a, b):
+    return a - b
