@@ -13,3 +13,18 @@
 1. Клонируйте репозиторий:
    ```bash
    git clone https://github.com/<username>/bank-masking-project.git
+   
+## Модуль generators
+
+В модуле `generators.py` находятся функции, позволяющие обрабатывать большие объёмы данных транзакций с помощью генераторов:
+
+1. **filter_by_currency(transactions, currency_code)**  
+   - Принимает список транзакций и код валюты, возвращает итератор (генератор), 
+     выдающий только те транзакции, у которых `currency['code']` совпадает с `currency_code`.
+   ```python
+   from src.generators import filter_by_currency
+
+   transactions = [...]  # список словарей
+   usd_transactions = filter_by_currency(transactions, "USD")
+   for t in usd_transactions:
+       print(t)  # выведутся только USD-транзакции

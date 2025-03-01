@@ -24,4 +24,3 @@ def mask_account_number(account_number: str) -> str:
     if not account_number:
         return ""
     return f"**{account_number[-4:]}"
-

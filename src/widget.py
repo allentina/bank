@@ -1,5 +1,6 @@
 from src.masks import mask_card_number, mask_account_number
 
+
 def mask_account_card(data: str) -> str:
     """
     Определяет, карта или счёт, и маскирует соответствующим образом.
@@ -13,6 +14,7 @@ def mask_account_card(data: str) -> str:
         return f"{splitted[0]} {mask_card_number(splitted[1])}"
     else:
         return data
+
 
 def get_date(date_string: str) -> str:
     """

@@ -1,9 +1,11 @@
 from src.masks import mask_card_number, mask_account_number
 
+
 def test_get_mask_card_number():
     # СТАЛО: передаем строку вместо int
     card_number = "7000792289606361"
     assert mask_card_number(card_number) == "7000 79** **** 6361"
+
 
 def test_get_mask_account():
     # СТАЛО: передаем строку вместо int
