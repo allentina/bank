@@ -45,3 +45,31 @@ def add(a, b):
 @log(filename="mylog.txt")  # вывод логов в файл
 def sub(a, b):
     return a - b
+
+## Функционал
+
+1. **Чтение JSON-файла** (`src/utils.py`):
+   - Функция `read_transactions_from_json(filepath: str) -> List[Dict]]` 
+   - Возвращает список транзакций (списков словарей) или `[]`, если файл пустой/битый/не найден.
+
+2. **Конвертация валют** (`src/external_api.py`):
+   - Функция `convert_to_rub(transaction: dict) -> float`
+   - Если `transaction["operationAmount"]["currency"]["code"] == "RUB"`, возвращает `amount` как есть.
+   - Если `USD`/`EUR`, запрашивает курс у API (Exchangerates Data API) и умножает сумму на курс рубля.
+   - Токен для API берется из переменной окружения `EXCHANGE_RATES_API_KEY`.
+
+## Окружение
+
+- В корне репозитория лежит `.env.example` (шаблон).
+- Добавьте свой ключ API в `.env` (не пушьте в GitHub!).
+
+## Тесты
+
+- **test_utils.py** — тесты для функции чтения JSON.
+- **test_external_api.py** — тесты для конвертации валют (mock/patch, фикстура env).
+- Запуск:
+  ```bash
+  pytest
+  coverage run -m pytest
+  coverage report
+  coverage html
