@@ -1,3 +1,4 @@
+
 def mask_card_number(card_number: str) -> str:
     if not card_number:
         return ""
