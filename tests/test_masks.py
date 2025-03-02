@@ -1,7 +1,6 @@
 import pytest
 from src.masks import mask_card_number, mask_account_number
 
-
 def test_mask_card_number() -> None:
     card = "1234567890123456"
     result = mask_card_number(card)
