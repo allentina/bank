@@ -3,6 +3,7 @@ from unittest.mock import patch, MagicMock
 from src.external_api import convert_to_rub
 from typing import Any
 
+
 @pytest.fixture
 def mock_api_key(monkeypatch: Any) -> None:
     monkeypatch.setenv("EXCHANGE_RATES_API_KEY", "test_api_key")

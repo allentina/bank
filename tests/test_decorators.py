@@ -2,6 +2,7 @@ import pytest
 from pathlib import Path
 from src.decorators import log
 
+
 def test_log_to_file_success(tmp_path: Path) -> None:
     """
     Пример теста, проверяющего запись в файл при успехе.

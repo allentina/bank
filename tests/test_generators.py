@@ -5,6 +5,7 @@ from src.generators import (
     card_number_generator
 )
 
+
 @pytest.fixture
 def sample_transactions() -> list[dict]:
     return [

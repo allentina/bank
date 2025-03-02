@@ -2,6 +2,7 @@ import json
 import os
 from typing import List, Dict, Any
 
+
 def read_transactions_from_json(filepath: str) -> List[Dict[str, Any]]:
     """
     Читает JSON-файл по заданному пути и возвращает список транзакций.
