@@ -1,6 +1,3 @@
-"""
-Тесты для функции read_transactions_from_json из модуля utils.
-"""
 
 import json
 from pathlib import Path

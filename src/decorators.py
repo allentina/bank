@@ -1,6 +1,3 @@
-"""
-Модуль с декоратором log, типизированный.
-"""
 
 import functools
 import sys

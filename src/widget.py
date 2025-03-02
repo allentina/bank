@@ -1,6 +1,3 @@
-"""
-Модуль widget (пример).
-"""
 
 from src.masks import mask_card_number, mask_account_number
 

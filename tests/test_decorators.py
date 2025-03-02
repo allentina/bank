@@ -1,4 +1,3 @@
-# tests/test_decorators.py
 
 import pytest
 from pathlib import Path

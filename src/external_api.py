@@ -1,6 +1,3 @@
-"""
-Модуль external_api: функции для работы с внешним API для конвертации валют.
-"""
 
 import os
 import requests

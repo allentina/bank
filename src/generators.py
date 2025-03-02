@@ -1,6 +1,3 @@
-"""
-Модуль generators (пример).
-"""
 
 from typing import List, Dict, Iterator
 

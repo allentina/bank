@@ -1,6 +1,3 @@
-"""
-Модуль processing (пример).
-"""
 
 from typing import List, Dict
 

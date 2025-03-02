@@ -1,6 +1,3 @@
-"""
-Тесты для функции convert_to_rub из модуля external_api.
-"""
 
 import pytest
 from unittest.mock import patch, MagicMock

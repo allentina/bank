@@ -1,6 +1,3 @@
-"""
-Тесты для generators.py
-"""
 
 import pytest
 from src.generators import (

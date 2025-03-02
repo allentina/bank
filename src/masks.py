@@ -1,7 +1,3 @@
-"""
-Модуль masks (пример).
-"""
-
 
 def mask_card_number(card_number: str) -> str:
     """
