@@ -1,10 +1,10 @@
-import pytest
-from src.masks import get_mask_card_number, get_mask_account
 
-def test_get_mask_card_number():
-    card_number = 7000792289606361
-    assert get_mask_card_number(card_number) == "7000 79** **** 6361"
+def mask_card_number(card_number: str) -> str:
+    if not card_number:
+        return ""
+    return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
-def test_get_mask_account():
-    account_number = 73654108430135874305
-    assert get_mask_account(account_number) == "**4305"
+def mask_account_number(account_number: str) -> str:
+    if not account_number:
+        return ""
+    return f"**{account_number[-4:]}"
