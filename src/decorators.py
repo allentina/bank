@@ -1,51 +1,42 @@
-# src/decorators.py
+"""
+Модуль с декоратором log, типизированный.
+"""
 
 import functools
+import sys
 from typing import Callable, Any, Optional
 
 
-def log(filename: Optional[str] = None) -> Callable:
+def log(filename: Optional[str] = None) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """
-    Декоратор, логирующий результат работы функции либо ошибку при её выполнении.
+    Декоратор, логирующий результат работы функции (или ошибку) в файл или консоль.
 
-    :param filename: Имя файла, в который будет записан лог.
-                     Если None, то вывод идёт в консоль.
+    :param filename: Имя файла, в который будет записан лог. Если None, логи выводятся в консоль.
     :type filename: Optional[str]
-    :return: Декорирующая функция
-    :rtype: Callable
+    :return: функция-декоратор
     """
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             func_name = func.__name__
             try:
-                # Вызов оригинальной функции
                 result = func(*args, **kwargs)
-
-                # Формируем сообщение об успешном выполнении
                 message = f"{func_name} ok"
                 if filename:
-                    # Записываем в файл
                     with open(filename, 'a', encoding='utf-8') as f:
                         f.write(message + "\n")
                 else:
-                    # Выводим в консоль
                     print(message)
-
                 return result
             except Exception as e:
-                # Формируем сообщение при ошибке
-                error_type = str(e)  # Можно и type(e).__name__, если нужен тип без описания
+                error_str = str(e)
                 inputs_str = f"Inputs: {args}, {kwargs}"
-                message = f"{func_name} error: {error_type}. {inputs_str}"
-
+                message = f"{func_name} error: {error_str}. {inputs_str}"
                 if filename:
                     with open(filename, 'a', encoding='utf-8') as f:
                         f.write(message + "\n")
                 else:
-                    print(message)
-
-                # Повторно бросаем исключение, чтобы не скрывать ошибку
+                    print(message, file=sys.stderr)
                 raise
 
         return wrapper

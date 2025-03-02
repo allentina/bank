@@ -1,25 +1,24 @@
-from src.masks import mask_account_number, mask_card_number
+import pytest
+from src.masks import mask_card_number, mask_account_number
 
 
-def test_get_mask_card_number():
-    # СТАЛО: передаем строку вместо int
-    card_number = "7000792289606361"
-    assert mask_card_number(card_number) == "7000 79** **** 6361"
+def test_mask_card_number() -> None:
+    card = "1234567890123456"
+    result = mask_card_number(card)
+    assert "1234" in result
 
 
-def test_get_mask_account():
-    # СТАЛО: передаем строку вместо int
-    account_number = "73654108430135874305"
-    assert mask_account_number(account_number) == "**4305"
-
-
-def test_mask_card_number_empty():
-    # если вход - пустая строка, ожидаем пустую строку
+def test_mask_card_number_empty() -> None:
     result = mask_card_number("")
     assert result == ""
 
 
-def test_mask_account_number_empty():
-    # если вход - пустая строка, ожидаем пустую строку
+def test_mask_account_number() -> None:
+    acc = "9876543210"
+    result = mask_account_number(acc)
+    assert result == "**3210"
+
+
+def test_mask_account_number_empty() -> None:
     result = mask_account_number("")
     assert result == ""

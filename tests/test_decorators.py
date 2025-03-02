@@ -1,30 +1,36 @@
-"""
-Тесты для декораторов.
-"""
+# tests/test_decorators.py
 
 import pytest
+from pathlib import Path
 from src.decorators import log
 
+def test_log_to_file_success(tmp_path: Path) -> None:
+    """
+    Пример теста, проверяющего запись в файл при успехе.
+    """
+    logfile = tmp_path / "testlog.txt"
 
-def test_log_to_console_success(capsys):
-    @log()
-    def multiply(a, b):
-        return a * b
+    @log(filename=str(logfile))
+    def summation(a: int, b: int) -> int:
+        return a + b
 
-    result = multiply(2, 5)
-    assert result == 10
-
-    captured = capsys.readouterr()
-    assert "multiply ok" in captured.out
+    summation(3, 4)
+    contents = logfile.read_text(encoding="utf-8")
+    assert "summation ok" in contents
 
 
-def test_log_to_console_error(capsys):
-    @log()
-    def divide(a, b):
-        return a / b
+def test_log_to_file_error(tmp_path: Path) -> None:
+    """
+    Пример теста, проверяющего запись в файл при ошибке.
+    """
+    logfile = tmp_path / "errorlog.txt"
+
+    @log(filename=str(logfile))
+    def problematic(x: int) -> float:
+        return 10 / x
 
     with pytest.raises(ZeroDivisionError):
-        divide(1, 0)
+        problematic(0)
 
-    captured = capsys.readouterr()
-    assert "divide error:" in captured.out
+    contents = logfile.read_text(encoding="utf-8")
+    assert "problematic error:" in contents

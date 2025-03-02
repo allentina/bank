@@ -2,7 +2,7 @@
 
 import json
 import os
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 def read_transactions_from_json(filepath: str) -> List[Dict[str, Any]]:

@@ -1,10 +1,13 @@
-from datetime import datetime
-from typing import Dict, List
+"""
+Модуль processing (пример).
+"""
+
+from typing import List, Dict
 
 
 def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
     """
-    Фильтрует список словарей по ключу 'state'.
+    Возвращает список словарей, у которых state соответствует указанному.
     """
     return [item for item in data if item.get('state') == state]
 
@@ -12,10 +15,10 @@ def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
 def sort_by_date(data: List[Dict], reverse: bool = True) -> List[Dict]:
     """
     Сортирует список словарей по ключу 'date'.
-    При некорректном формате даты должно выбрасываться ValueError (из datetime.fromisoformat).
     """
+    from datetime import datetime
     return sorted(
         data,
-        key=lambda x: datetime.fromisoformat(x['date']),  # при 'НекорректнаяДата' будет ValueError
+        key=lambda x: datetime.fromisoformat(x['date']),
         reverse=reverse
     )
