@@ -1,8 +1,15 @@
-from src.masks import mask_account_number
+from src.masks import mask_card_number, mask_account_number
+
+
+def main() -> None:
+    card_number = "1234567890123456"
+    masked_card = mask_card_number(card_number)
+    print("Masked card:", masked_card)
+
+    account_number = "9876543210"
+    masked_account = mask_account_number(account_number)
+    print("Masked account:", masked_account)
+
 
 if __name__ == "__main__":
-    card_num = 7000792289606361
-    account_num = 73654108430135874305
-
-    print("Маска карты:", mask_card_number(card_number))
-    print("Маска счета:", mask_account_number(account_number))
+    main()

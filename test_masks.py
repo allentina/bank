@@ -4,6 +4,7 @@ def mask_card_number(card_number: str) -> str:
         return ""
     return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
+
 def mask_account_number(account_number: str) -> str:
     if not account_number:
         return ""
