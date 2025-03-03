@@ -1,15 +1,17 @@
 [tool.poetry]
-name = "my_project"
+name = "bank_masking_project"
 version = "0.1.0"
-description = "Project with sum_divisible_by_3_or_5, check_email, count_number_in_list, calculate_area"
+description = "Example project with coverage > 80%"
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
+requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
+pytest-cov = "^6.0.0"
 mypy = "^1.5.1"
 flake8 = "^6.1.0"
 isort = "^5.12.0"

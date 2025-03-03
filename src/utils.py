@@ -1,5 +1,5 @@
 """
-Модуль utils.py: чтение JSON-файла
+Модуль utils.py: чтение JSON-файлов
 """
 
 import json
@@ -9,10 +9,9 @@ from typing import List, Dict, Any
 
 def read_transactions_from_json(filepath: str) -> List[Dict[str, Any]]:
     """
-    Читает JSON-файл и возвращает список транзакций.
-    Если файл отсутствует, пустой или невалидный — возвращает [].
+    Читает JSON-файл и возвращает список словарей-транзакций.
+    Если файл не существует, пустой или содержит не-список — возвращает [].
     """
-
     if not os.path.exists(filepath):
         return []
     try:

@@ -4,6 +4,7 @@
 
 from src.widget import mask_account_card
 
+
 def test_mask_account_card_incorrect_data() -> None:
     input_data = "НекорректныйТип 123456"
     result = mask_account_card(input_data)

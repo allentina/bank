@@ -15,7 +15,7 @@ def sample_transactions() -> list[dict]:
                 "amount": "100",
                 "currency": {"code": "USD"}
             },
-            "description": "Перевод 1",
+            "description": "Перевод №1",
         },
         {
             "id": 2,
@@ -23,7 +23,7 @@ def sample_transactions() -> list[dict]:
                 "amount": "200",
                 "currency": {"code": "RUB"}
             },
-            "description": "Перевод 2",
+            "description": "Перевод №2",
         },
         {
             "id": 3,
@@ -31,27 +31,26 @@ def sample_transactions() -> list[dict]:
                 "amount": "300",
                 "currency": {"code": "USD"}
             },
-            "description": "Перевод 3",
+            "description": "Перевод №3",
         },
     ]
 
 
 def test_filter_by_currency_usd(sample_transactions: list[dict]) -> None:
     gen = filter_by_currency(sample_transactions, "USD")
-    result = list(gen)
-    assert len(result) == 2
-    assert result[0]["id"] == 1
-    assert result[1]["id"] == 3
+    res = list(gen)
+    assert len(res) == 2
+    assert res[0]["id"] == 1
+    assert res[1]["id"] == 3
 
 
 def test_transaction_descriptions(sample_transactions: list[dict]) -> None:
     gen = transaction_descriptions(sample_transactions)
     descs = list(gen)
-    assert descs == ["Перевод 1", "Перевод 2", "Перевод 3"]
+    assert descs == ["Перевод №1", "Перевод №2", "Перевод №3"]
 
 
 def test_card_number_generator() -> None:
     gen = card_number_generator(1, 1)
-    result = list(gen)
-    # 1 -> "0000 0000 0000 0001"
-    assert result == ["0000 0000 0000 0001"]
+    res = list(gen)
+    assert res == ["0000 0000 0000 0001"]

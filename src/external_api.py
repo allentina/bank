@@ -9,12 +9,12 @@ from typing import Dict, Any, Optional
 
 def convert_to_rub(transaction: Dict[str, Any]) -> float:
     """
-    Конвертация суммы транзакции в рубли через внешний API.
-    Если RUB, возвращаем сумму как есть.
-    Если данные отсутствуют, возвращаем 0.0
-    Если нет API-ключа, выбрасываем ValueError.
+    Конвертирует сумму транзакции (operationAmount -> { amount, currency: { code } })
+    в рубли через внешний API (apilayer).
+    Если currency_code == "RUB", возвращает amount как есть.
+    Если данные отсутствуют, возвращает 0.0.
+    Если нет переменной окружения EXCHANGE_RATES_API_KEY, выбрасывает ValueError.
     """
-
     amount_str: Optional[str] = transaction.get("operationAmount", {}).get("amount")
     currency_code: Optional[str] = transaction.get("operationAmount", {}).get("currency", {}).get("code")
 
