@@ -9,11 +9,11 @@ from typing import Dict, Any, Optional
 
 def convert_to_rub(transaction: Dict[str, Any]) -> float:
     """
-    Конвертирует сумму транзакции (operationAmount -> { amount, currency: { code } })
-    в рубли через внешний API (apilayer).
-    Если currency_code == "RUB", возвращает amount как есть.
-    Если данные отсутствуют, возвращает 0.0.
-    Если нет переменной окружения EXCHANGE_RATES_API_KEY, выбрасывает ValueError.
+    Конвертирует сумму транзакции в рубли:
+      - Если currency='RUB' -> возвращаем сумму
+      - Если нет EXCHANGE_RATES_API_KEY -> ValueError
+      - Если нет данных -> 0.0
+      - Иначе ходим на https://api.apilayer.com/exchangerates_data
     """
     amount_str: Optional[str] = transaction.get("operationAmount", {}).get("amount")
     currency_code: Optional[str] = transaction.get("operationAmount", {}).get("currency", {}).get("code")
@@ -36,5 +36,5 @@ def convert_to_rub(transaction: Dict[str, Any]) -> float:
     response = requests.get(url, params=params, headers=headers, timeout=5)
     response.raise_for_status()
     data = response.json()
-    rate = data["rates"]["RUB"]
-    return amount * float(rate)
+    rate = float(data["rates"]["RUB"])
+    return amount * rate

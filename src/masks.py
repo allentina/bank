@@ -2,11 +2,13 @@
 Модуль masks.py
 """
 
+
 def mask_card_number(card_number: str) -> str:
     """
-    Маскирует номер карты в формате XXXX XX** **** XXXX.
-    Если карта короче 16 символов, возвращает "**" + card_number.
-    Если пустая строка, вернёт "".
+    Маскирует карту:
+      - Если пустая -> ""
+      - Если <16 -> "**" + card_number
+      - Иначе -> "XXXX XX** **** XXXX"
     """
     if not card_number:
         return ""
@@ -17,9 +19,10 @@ def mask_card_number(card_number: str) -> str:
 
 def mask_account_number(account_number: str) -> str:
     """
-    Маскирует номер счёта, добавляя '**' + последние 5 цифр.
-    Если короче 5, вернёт "**" + account_number.
-    Если пустая строка => "".
+    Маскирует счёт:
+      - Если пустой -> ""
+      - Если <5 -> "**" + account_number
+      - Иначе -> "**" + последние 5 цифр
     """
     if not account_number:
         return ""

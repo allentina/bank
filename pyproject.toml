@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "bank_masking_project"
 version = "0.1.0"
-description = "Example project with coverage > 80%"
-authors = ["Your Name <you@example.com>"]
+description = "Example code with coverage 80%+"
+authors = ["YourName <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -14,7 +14,6 @@ pytest = "^7.4.2"
 pytest-cov = "^6.0.0"
 mypy = "^1.5.1"
 flake8 = "^6.1.0"
-isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.3.0"]

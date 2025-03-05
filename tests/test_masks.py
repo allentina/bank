@@ -6,8 +6,7 @@ from src.masks import mask_card_number, mask_account_number
 
 
 def test_mask_card_number_normal() -> None:
-    result = mask_card_number("1234567890123456")
-    assert result == "1234 56** **** 3456"
+    assert mask_card_number("1234567890123456") == "1234 56** **** 3456"
 
 
 def test_mask_card_number_empty() -> None:
@@ -19,8 +18,7 @@ def test_mask_card_number_short() -> None:
 
 
 def test_mask_account_number_normal() -> None:
-    result = mask_account_number("9876543210")
-    assert result == "**43210"
+    assert mask_account_number("9876543210") == "**43210"
 
 
 def test_mask_account_number_empty() -> None:

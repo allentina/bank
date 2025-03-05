@@ -1,16 +1,19 @@
+"""
+Модуль decorators.py
+Логирующий декоратор @log
+"""
 
 import functools
 import sys
-from typing import Callable, Any, Optional
+from typing import Callable, Optional, Any
 
 
 def log(filename: Optional[str] = None) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """
-    Декоратор, логирующий результат работы функции (или ошибку) в файл или консоль.
-
-    :param filename: Имя файла, в который будет записан лог. Если None, логи выводятся в консоль.
-    :type filename: Optional[str]
-    :return: функция-декоратор
+    Декоратор, логирующий результат работы функции:
+    - При успехе -> "[OK] func_name finished successfully."
+    - При ошибке -> "[ERROR] func_name failed: ..."
+    Если filename=None, выводим в консоль, иначе дописываем в файл.
     """
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
@@ -18,24 +21,20 @@ def log(filename: Optional[str] = None) -> Callable[[Callable[..., Any]], Callab
             func_name = func.__name__
             try:
                 result = func(*args, **kwargs)
-                message = f"{func_name} ok"
-                if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
-                        f.write(message + "\n")
+                msg_ok = f"[OK] {func_name} finished successfully."
+                if filename is None:
+                    print(msg_ok)
                 else:
-                    print(message)
+                    with open(filename, "a", encoding="utf-8") as f:
+                        f.write(msg_ok + "\n")
                 return result
             except Exception as e:
-                error_str = str(e)
-                inputs_str = f"Inputs: {args}, {kwargs}"
-                message = f"{func_name} error: {error_str}. {inputs_str}"
-                if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
-                        f.write(message + "\n")
+                msg_err = f"[ERROR] {func_name} failed: {e}"
+                if filename is None:
+                    print(msg_err, file=sys.stderr)
                 else:
-                    print(message, file=sys.stderr)
+                    with open(filename, "a", encoding="utf-8") as f:
+                        f.write(msg_err + "\n")
                 raise
-
         return wrapper
-
     return decorator
