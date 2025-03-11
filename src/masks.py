@@ -1,20 +1,31 @@
+"""
+Модуль masks.py
+"""
+
+
 def mask_card_number(card_number: str) -> str:
     """
-    Маскирует номер карты.
-
-    :param card_number: Строка с номером карты, например '7000792289606361'.
-    :return: Маскированная строка, например '7000 79** **** 6361'.
+    Маскирует карту:
+      - Если пустая -> ""
+      - Если <16 -> "**" + card_number
+      - Иначе -> "XXXX XX** **** XXXX"
     """
-    # Для примера берём формат: 4 цифры, пробел, 2 цифры, '**', '****', и последние 4 цифры
+    if not card_number:
+        return ""
+    if len(card_number) < 16:
+        return f"**{card_number}"
     return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
 
 def mask_account_number(account_number: str) -> str:
     """
-    Маскирует номер счёта.
-
-    :param account_number: Строка с номером счёта, например '73654108430135874305'.
-    :return: Маскированная строка, например '**4305'.
+    Маскирует счёт:
+      - Если пустой -> ""
+      - Если <5 -> "**" + account_number
+      - Иначе -> "**" + последние 5 цифр
     """
-    return f"**{account_number[-4:]}"
-
+    if not account_number:
+        return ""
+    if len(account_number) < 5:
+        return f"**{account_number}"
+    return f"**{account_number[-5:]}"
