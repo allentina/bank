@@ -1,2 +1,8 @@
-requests~=2.32.3
-pytest~=8.3.4
+requests==2.31.0
+pandas==2.0.0
+openpyxl==3.1.2
+pytest==7.4.2
+pytest-cov==6.0.0
+mypy==1.5.1
+flake8==6.1.0
+types-requests==2.31.0.6
